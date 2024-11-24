@@ -6,29 +6,30 @@
 using Number = double;
 
 bool ReadNumber(Number& result) {
-    std::cin>>result;
+    std::cin >> result;
     if (std::cin.fail()) {
         std::cerr << "Error: Numeric operand expected" << std::endl;
         return false;
-    } else {
-        return true;
-    }
+    } 
+    return true;
 }
 
 bool RunCalculatorCycle() {
-    Number operand, memory_cell;
+    Number operand = 0.0;
+    Number memory_cell = 0.0;
     ReadNumber(operand);
 
     std::string action_temp;
     bool is_memory = false;
         
         while (!std::cin.fail()) {
-            std::cin>>action_temp;
+            std::cin >> action_temp;
             char action = action_temp[0];
-            Number next_operand, next_enter;
+            Number next_operand = 0.0;
+            Number next_enter = 0.0;
      
-            if ((action_temp[0]=='*') && (action_temp[1]=='*')) {
-                action='^';
+            if ((action_temp[0] =='*') && (action_temp[1] =='*')) {
+                action = '^';
             }
             
             switch (action)
@@ -64,7 +65,7 @@ bool RunCalculatorCycle() {
                     operand = next_operand;
                     break;
                 case '=':
-                    std::cout<<operand<<std::endl;
+                    std::cout << operand << std::endl;
                     break;
                 case 'c':
                     operand = 0;
@@ -80,17 +81,16 @@ bool RunCalculatorCycle() {
                         operand = memory_cell;
                         break;
                     } else {
-                        std::cerr<<"Error: Memory is empty"<<std::endl;
+                        std::cerr << "Error: Memory is empty" << std::endl;
                         return 0;
                         break;
                     } 
                 
                 default:
-                    std::cerr<<"Error: Unknown token " << action_temp << std::endl;
+                    std::cerr << "Error: Unknown token " << action_temp << std::endl;
                     return false;
             } 
       } 
-    
     return true;
 }
 
